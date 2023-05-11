@@ -8,6 +8,8 @@ const options = {
     useUnifiedTopology: true,
 };
 
+// Conectando com o MongoDB
+
 const connectWithRetry = () => {
     console.log("MongoDB connection with retry");
     mongoose
@@ -30,5 +32,5 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
-//! Exporta o mongoose para ser usado em outros arquivos já conectando ao banco de dados
-export default { mongoose };
+// Exporta o mongoose para ser usado em outros arquivos já conectando ao MongoDB
+export default mongoose;
