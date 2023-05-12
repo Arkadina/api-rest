@@ -28,11 +28,13 @@ userSchema.findById = (cb) => {
 // Modelo do usuário
 const User = mongoose.model("Users", userSchema);
 
+const createUser = (userData) => {
+    const user = new User(userData);
+    return user.save();
+};
+
 const UserModel = {
-    createUser: (userData) => {
-        const user = new User(userData);
-        return user.save();
-    },
+    createUser,
 };
 
 export default UserModel;
