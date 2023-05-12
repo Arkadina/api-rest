@@ -33,8 +33,13 @@ const createUser = (userData) => {
     return user.save();
 };
 
+const findByEmail = (email) => {
+    return User.find({ email: email });
+};
+
 const UserModel = {
     createUser,
+    findByEmail,
 };
 
 export default UserModel;

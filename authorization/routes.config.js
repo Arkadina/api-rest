@@ -1,13 +1,14 @@
 import AuthorizationController from "./controllers/authorization.controller.js";
-import VerifyUserMiddleWare from "./middlewares/verify.user.middleware.js";
+import VerifyUserMiddleware from "./middlewares/verify.user.middleware.js";
 
 const routesConfig = (app) => {
-    app.get("/auth", [
-        VerifyUserMiddleWare.hasAuthValidFields,
+    app.post("/auth", [
+        VerifyUserMiddleware.hasAuthValidFields,
+        VerifyUserMiddleware.isPasswordAndUserMatch,
         AuthorizationController.login,
     ]);
 
-    app.get("auth/refresh", []);
+    app.post("auth/refresh", []);
 };
 
 export default routesConfig;
