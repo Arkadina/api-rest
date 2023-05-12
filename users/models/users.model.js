@@ -28,18 +28,25 @@ userSchema.findById = (cb) => {
 // Modelo do usuário
 const User = mongoose.model("Users", userSchema);
 
-const createUser = (userData) => {
+const createUser = async (userData) => {
     const user = new User(userData);
-    return user.save();
+    return await user.save();
 };
 
-const findByEmail = (email) => {
-    return User.find({ email: email });
+const findByEmail = async (email) => {
+    return await User.find({ email: email });
+};
+
+const checkIfUserExists = async (email) => {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return true;
+    return false;
 };
 
 const UserModel = {
     createUser,
     findByEmail,
+    checkIfUserExists,
 };
 
 export default UserModel;
