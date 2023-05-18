@@ -22,7 +22,7 @@ const onlySameUserOrAdminCanDoThisAction = (req, res, next) => {
 
     if (
         user_permission_level === parseInt(config.permissionLevels.ADMIN) ||
-        userId === req.params.user_id
+        userId === req.params.userId
     ) {
         return next();
     } else {

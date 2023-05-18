@@ -11,7 +11,7 @@ const userSchema = new Schema({
 });
 
 // userSchema.virtual('id') cria um campo virtual que não é armazenado no banco  de dados
-userSchema.virtual("id").get(() => {
+userSchema.virtual("id").get(function () {
     return this._id.toHexString();
 });
 
@@ -43,10 +43,37 @@ const checkIfUserExists = async (email) => {
     return false;
 };
 
+const list = async (perPage = 10, page = 0) => {
+    return await User.find()
+        .limit(perPage)
+        .skip(perPage * page)
+        .exec();
+};
+
+const findById = async (id) => {
+    return await User.findById(id);
+};
+
+const patchUser = async (id, userData) => {
+    return User.findOneAndUpdate(
+        { _id: id },
+        { $set: userData },
+        { new: true }
+    );
+};
+
+const removeById = async (id) => {
+    return await User.deleteOne({ _id: id });
+};
+
 const UserModel = {
     createUser,
     findByEmail,
+    findById,
+    removeById,
     checkIfUserExists,
+    list,
+    patchUser,
 };
 
 export default UserModel;

@@ -6,6 +6,28 @@ import UserController from "./controllers/user.controllers.js";
 
 const routesConfig = (app) => {
     app.post("/users", UserController.insert);
+    app.get("/users", [
+        AuthValidationMiddleware.validJWTNeeded,
+        AuthPermissionMiddleware.minimumPermissionLevelRequired("PAID_USER"),
+        UserController.list,
+    ]);
+    app.get("/users/:userId", [
+        AuthValidationMiddleware.validJWTNeeded,
+        AuthPermissionMiddleware.minimumPermissionLevelRequired("NORMAL_USER"),
+        AuthPermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+        UserController.getById,
+    ]);
+    app.patch("/users/:userId", [
+        AuthValidationMiddleware.validJWTNeeded,
+        AuthPermissionMiddleware.minimumPermissionLevelRequired("NORMAL_USER"),
+        AuthPermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+        UserController.patchById,
+    ]);
+    app.delete("/users/:userId", [
+        AuthValidationMiddleware.validJWTNeeded,
+        AuthPermissionMiddleware.minimumPermissionLevelRequired("ADMIN"),
+        UserController.removeById,
+    ]);
 };
 
-export default routesConfig;
+export default routesConfig; 
