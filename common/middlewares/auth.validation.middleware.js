@@ -12,6 +12,7 @@ const validJWTNeeded = (req, res, next) => {
         req.jwt = jwt.verify(authorization[1], config.jwt_secret);
         return next();
     } else {
+        // 403: forbidden
         return res.status(403).send();
     }
 };
@@ -21,6 +22,7 @@ const verifyRefreshBodyField = (req, res, next) => {
         // Verifica se o refresh_token - que foi criado no login - está sendo enviado no corpo da requisição
         return next();
     } else {
+        // 400: bad request
         return res
             .status(400)
             .send({ error: "need to pass refresh_token field" });
@@ -39,12 +41,12 @@ const validRefreshNeeded = (req, res, next) => {
         .update(refreshId)
         .digest("base64");
 
-
     if (hash === refresh_token) {
         req.body = req.jwt;
         // Envia para o próximo middleware para criar um novo token
         return next();
     } else {
+        // 400: bad request
         return res.status(400).send({ error: "invalid refresh token." });
     }
 };
