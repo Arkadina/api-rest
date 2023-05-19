@@ -8,19 +8,21 @@ I also added comments to the code so that anyone who speaks Portuguese can under
 
 express, nodemon, jsonwebtoken & mongoose.
 
-Routes
+## Routes
 
 | Route                          | Actions                | Method | Body                                 | Authorization (header)                          |
 | ------------------------------ | ---------------------- | ------ | ------------------------------------ | ----------------------------------------------- |
-| /users                         | Create user            | post   | firstName, LastName, email, password | /                                               |
-| /auth                          | Login                  | post   | email, password                      | /                                               |
+| /users                         | Create user            | post   | firstName, LastName, email, password |                                                 |
+| /auth                          | Login                  | post   | email, password                      |                                                 |
 | /auth/refresh                  | Generate new jwt token | post   | refresh_token                        | Bearer jwt_token                                |
 | /users - queries: limit & page | Get all users          | get    |                                      | Bearer jwt_token + permission level (PAID_USER) |
 | /users/:user_id                | Get own user data      | get    |                                      | Bearer jwt_token                                |
 | /users/:user_id                | Edit own user data     | patch  | firstName, LastName, email, password | Bearer jwt_token                                |
 | /users/:user_id                | Delete user            | delete |                                      | Bearer jwt_token + permission level (ADMIN)     |
 
-Config
+## Config
+
+./common/config/env.config.js
 
 ```js
 const config = {
