@@ -37,7 +37,7 @@ const config = {
 };
 ```
 
-Install
+## Install
 
 ```batch
 npm install
