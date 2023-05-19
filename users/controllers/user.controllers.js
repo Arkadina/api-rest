@@ -50,6 +50,10 @@ const getById = async (req, res) => {
 
 const patchById = async (req, res) => {
     if (req.params.userId) {
+        if (req.body.permissionLevel) {
+            return res.status(400).send();
+        }
+
         if (req.body.password) {
             let salt = crypto.randomBytes(16).toString("base64");
             let hash = crypto

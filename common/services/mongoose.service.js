@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import config from "../config/env.config.js";
 let count = 0;
 
 const options = {
@@ -13,10 +14,7 @@ const options = {
 const connectWithRetry = () => {
     console.log("MongoDB connection with retry");
     mongoose
-        .connect(
-            `mongodb+srv://imastucia1990:QRnZzT4JVUfKWRuq@cluster0.npvvkfl.mongodb.net/?retryWrites=true&w=majority`,
-            options
-        )
+        .connect(config.mongodb_URI, options)
         .then(() => {
             console.log("MongoDB is connected.");
         })

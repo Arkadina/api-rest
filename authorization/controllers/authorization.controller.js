@@ -35,7 +35,9 @@ const login = async (req, res) => {
 const refresh_token = (req, res) => {
     try {
         req.body = req.jwt;
-        let token = jwt.sign(req.body, config.jwt_secret);
+        let token = jwt.sign(req.body, config.jwt_secret, {
+            expiresIn: "60m",
+        });
         res.status(201).send({ id: token });
     } catch {
         res.status(500).send({ errors: err });

@@ -13,7 +13,7 @@ const routesConfig = (app) => {
         AuthValidationMiddleware.validJWTNeeded,
         AuthValidationMiddleware.verifyRefreshBodyField,
         AuthValidationMiddleware.validRefreshNeeded,
-        AuthorizationController.login,
+        AuthorizationController.refresh_token,
     ]);
 };
 

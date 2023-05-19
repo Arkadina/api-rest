@@ -1,10 +1,7 @@
 const config = {
-    port: "3000",
-    appEndpoint: "http://localhost:3000",
-    apiEndpoint: "http://localhost:3000",
-    jwt_secret: "myS33!!creeeTwhereibelong",
-    jwt_expiration_in_seconds: 60,
-    environment: "dev",
+    port: "",
+    jwt_secret: "whereibelong",
+    mongodb_URI: "",
     permissionLevels: {
         NORMAL_USER: 1,
         PAID_USER: 4,
